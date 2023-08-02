@@ -1,0 +1,96 @@
+\documentclass{article}
+%\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+ \usepackage{graphicx}
+ \usepackage{titling}
+
+ \title{Aufgaben zu Psychology/Usability und Web Security}
+\author{Nils Kempen - 531507}
+\date{August 2023}
+ 
+ \usepackage{fancyhdr}
+\fancypagestyle{plain}{%  the preset of fancyhdr 
+    \fancyhf{} % clear all header and footer fields
+    %\fancyfoot[R]{\includegraphics[width=3cm]{Logo_WWU.png}}
+    \fancyfoot[L]{\thedate}
+    \fancyhead[L]{Netzwerk- und Systemsicherheit - Zusatzaufgabe}
+    \fancyhead[R]{\theauthor}
+}
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 1em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+    \vskip 1em%
+    %{\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1em}
+\makeatother
+
+\usepackage{lipsum}  
+\usepackage{cmbright}
+
+\begin{document}
+
+\maketitle
+
+% \noindent\begin{tabular}{@{}ll}
+%     Student & \theauthor\\
+%      Promotor &  dr. Gilles Callebaut\\
+%      Co-promotors & ing. Jarne Van Mulders, ing. Guus Leenders
+% \end{tabular}
+
+\section{Psychology/Usability}
+
+\subsection{Theorie}
+Sie sind als Sicherheitsexperte für eine Firma tätig und sollen eine neue Passwortrichtlinie erstellen, um die Sicherheit der Unternehmenskonten zu verbessern. Entwerfen Sie eine umfassende Passwortrichtlinie, die den aktuellen Kenntnisstand und bewährte Sicherheitspraktiken berücksichtigt.
+Formulieren Sie sowohl Anforderungen an die Passwörter, die von den Mitarbeitern erfüllt werden müssen, als auch Wege diese Regeln in der Firma umzusetzen
+
+\subsection{Praxis}
+Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nutzen Sie dafür die vier in der Vorlesung beschriebenen Checks: 
+
+\begin{itemize}
+    \item Überprüfen Sie, ob das Passwort aus einem Wörterbuch stammt. Nutzen sie dafür die Datei "wordlist-german.txt" aus dem Ordner "Passwords".
+    \item Überprüfen Sie, ob das Passwort auf der Liste der von Angreifern ausprobierten Passwörter steht. Nutzen Sie dafür die API von "Have I Been Pwned". https://haveibeenpwned.com/API/v3\#PwnedPasswords
+    \item Überprüfen Sie auch auf häufige Substitutionen aus dem Leetspeek. https://de.wikipedia.org/wiki/Leetspeak
+    \item Überprüfen Sie auf Kombinationen von Zahlen, die Datumsangaben sein könnten.
+\end{itemize}
+
+
+\section{Web Security}
+
+\subsection{Theorie}
+\begin{enumerate}
+    \item Erklären Sie das Konzept der "Defense in Depth".
+    \item Warum sollten Web-Anwendungen nicht als Benutzer "root" laufen? Was ist der Standard Nutzer für WebServer auf UNIX-artigen Systemen?
+    \item Kann das betreiben der Applikation innerhalb eines Docker-Containers zusätzlichen Schutz bieten?
+    \item Was bedeutet es Passwörter zu "hashen" und zu "salten" und warum sollte eine Web-Anwendung dies tun?
+    \item Was für weitere Ansätze fallen Ihnen ein um eine Web-Anwendung in der Tiefe sicher zu machen?
+\end{enumerate}
+
+\subsection{Praxis}
+Laden Sie die im Ordner "Flask-Beispiel" zur Verfügung stehende Python Web-Anwendung herunter. \\
+In dieser Anwendung können Nachrichten über ein Formular erstellt werden. Diese werden auf der Startseite angezeigt.
+
+\begin{enumerate}
+    \item Sichern Sie die Anwendung gegen XSS-Angriffe ab indem sie "input-validation" in der entsprechenden Methode durchführen. (Anmerkung: Das hier verwendete Flask-Framework macht dies normalerweise von alleine indem es jeglichen durch Variablen in die Templates eingefügten Inhalt HTML-Escaped. Für diese Übung wurde dieses Feature abgeschaltet.)
+    \item Hashen und Salten sie die im Formular als "secret" übergebene Variable in der dafür vorgesehen Funktion mit der Python-Bibliothek "bcrypt"
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}

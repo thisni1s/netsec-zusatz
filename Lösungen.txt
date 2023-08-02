@@ -1,0 +1,18 @@
+1.1
+Lösung:
+Anforderungen an Passwörter: 
+Komplex und Unvorhersehbar, erfinden mit Dice Method, Buchstaben aus Sätzen, DAO 
+Keine bereits veröffentlichten Passwörter
+
+Organisationale Maßnahmen
+Empfehlen von Passwortmanagern
+Regelmäßige Sicherheitsschulungen
+Multi-Factor Authentication
+Nutzung von modernen Passwortlosen Technoligien wie FIDO2
+
+1.2 -> CODE
+
+2.1
+    5. regelmäßige updates, monitoring and logging, Firewalls
+
+2.2 -> CODE

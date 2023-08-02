@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Messages {% endblock %}</h1>
+    {% autoescape false %}
+    {% for message in messages %}
+        <div class='message'>
+            <h3>Title: {{ message['title'] }}</h3>
+            <p>Content: {{ message['content'] }}</p>
+            <p>Secret: {{ message['secret'] }}</p>
+            <p>Salt: {{ message['salt'] }}</p>
+        </div>
+    {% endfor %}
+    {% endautoescape %}
+{% endblock %}
