@@ -27,32 +27,40 @@ substitutions =  {
 }
 
 
-def check_password_against_haveibeenpwned(password) -> bool:
-    #
-    # TODO: Schicken sie das gehashte an haveibeenpwned und überprüfen sie,
-    # ob das passwort in der liste der geknackten Passwörter steht. 
-    #
+def check_password_against_haveibeenpwned(password):
+    sha1_password_hash = hashlib.sha1(password.encode()).hexdigest().upper()
+    prefix = sha1_password_hash[:5]
+
+    url = f'https://api.pwnedpasswords.com/range/{prefix}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        res = response.text.splitlines()
+        suffixes = [item[:35] for item in res]
+        if sha1_password_hash[5:] in suffixes:
+            return True
     return False
 
-def is_date(password) -> bool:
-    #
-    # TODO: Überprüfen sie ob das Passwort ein Datum enthält.
-    # Tipp: Nutzen sie das Flag 'fuzzy' aus der dateutil library
-    #
-    return False
-
+def is_date(string):
+    try: 
+        parse(string, fuzzy=True)
+        return True
+    except ValueError:
+        return False
+    
 def is_from_dictionary(password) -> bool:
-    #
-    # TODO: Überprüfen sie ob das Passwort ein Wort aus dem Wörterbuch ist.
-    # Nutzen sie dafür die Datei 'wordlist-german.txt' 
-    #
-    return False
-
+    with open("wordlist-german.txt", "r") as f:
+        dictionary_words = [word.strip().lower() for word in f]
+        if password.lower() in dictionary_words:
+            return True
+        else:
+            return False
+    
 def check_with_substitutions(password) -> bool:
-    #
-    # TODO: Ersetzen sie gängige LeetSpeak Zeichen durch normale Textzeichen
-    # und prüfen sie dass dadurch enstandenen Passwort
-    return 
+    password_subs = password
+    for subs, letter in substitutions.items():
+        password_subs = password_subs.replace(letter, subs)        
+    return check_password(password_subs)
 
 def check_password(password):
 
@@ -80,7 +88,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     password = sys.argv[1]
-
+    
     if check_password(password) is False:
         sys.exit(1)
     if check_with_substitutions(password) is False:

@@ -30,13 +30,20 @@ def create():
 
 
 def input_validation(title, content, secret) -> bool:
-    #
-    # TODO: Schreiben sie hier den Code für die input validation.
-    #
-    return True
+    if not title:
+        return False
+    elif not content:
+        return False
+    elif not secret:
+        return False
+    else:
+        return True
     
 def hashnsalt(secret):
-   #
-   # TODO: Hashen und Salten sie das secret mit bcrypt und geben sie SOWOHL hash ALS AUCH salt zurück.
-   #
-   return (secret, 'hier könnte ihr salt stehen')
+    # Generate a random salt (a string of random characters)
+    salt = bcrypt.gensalt()
+    
+    # Hash the password using the generated salt
+    hashed_password = bcrypt.hashpw(secret.encode('utf-8'), salt)
+    
+    return (hashed_password, salt)
