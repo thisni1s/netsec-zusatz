@@ -18,26 +18,28 @@ def create():
         title = request.form['title']
         content = request.form['content']
         secret = request.form['secret']
+        
+        title, content, secret, res = input_validation(title, content, secret)
 
-        if not input_validation(title, content, secret):
-            flash("Bad form input!")
-        else:
+        if res:
             hash, salt = hashnsalt(secret)
             messages.append({'title': title, 'content': content, 'secret': hash, 'salt': salt})
             return redirect(url_for('index'))
+        else:
+            flash("Bad form input!")
 
     return render_template('create.html')
 
 
-def input_validation(title, content, secret) -> bool:
-    if not title:
-        return False
-    elif not content:
-        return False
-    elif not secret:
-        return False
-    else:
-        return True
+def input_validation(title: str, content: str, secret: str) -> (str, str, str, bool):
+    title = title.replace('>', '&gt;').replace('<', '&lt;')
+    content = content.replace('>', '&gt;').replace('<', '&lt;')
+    secret = secret.replace('>', '&gt;').replace('<', '&lt;')
+
+    res = True if (title and content and secret) else False
+
+    return (title, content, secret, res)
+
     
 def hashnsalt(secret):
     # Generate a random salt (a string of random characters)

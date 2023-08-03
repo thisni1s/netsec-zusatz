@@ -19,21 +19,24 @@ def create():
         content = request.form['content']
         secret = request.form['secret']
 
-        if not input_validation(title, content, secret):
-            flash("Bad form input!")
-        else:
+        title, content, secret, res = input_validation(title, content, secret)
+
+        if res:
             hash, salt = hashnsalt(secret)
             messages.append({'title': title, 'content': content, 'secret': hash, 'salt': salt})
             return redirect(url_for('index'))
+        else:
+            flash("Bad form input!")
 
     return render_template('create.html')
 
 
-def input_validation(title, content, secret) -> bool:
+def input_validation(title: str, content: str, secret: str) -> (str, str, str, bool):
     #
     # TODO: Schreiben sie hier den Code für die input validation.
     #
-    return True
+    res = True # Mit dieser Variable können Sie steuern ob in der UI eine Fehlermeldung angezeigt wird
+    return (title, content, secret, res)
     
 def hashnsalt(secret):
    #
