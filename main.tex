@@ -59,7 +59,7 @@ Sie sind als Sicherheitsexperte für eine Firma tätig und sollen eine neue Pass
 Formulieren Sie sowohl Anforderungen an die Passwörter, die von den Mitarbeitern erfüllt werden müssen, als auch Wege diese Regeln in der Firma umzusetzen.
 
 \subsection{Praxis}
-Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nutzen Sie dafür die vier in der Vorlesung beschriebenen Checks: 
+Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nutzen Sie dafür die vier in der Vorlesung beschriebenen Checks und implementieren sie die entsprechenden Funktionen in der vorgefertigten Datei "Passwords/password\_checker.py" 
 
 \begin{itemize}
     \item Überprüfen Sie, ob das Passwort aus einem Wörterbuch stammt. Nutzen sie dafür die Datei "wordlist-german.txt" aus dem Ordner "Passwords".
@@ -74,8 +74,8 @@ Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nut
 \subsection{Theorie}
 \begin{enumerate}
     \item Erklären Sie das Konzept der "Defense in Depth".
-    \item Warum sollten Web-Anwendungen nicht als Benutzer "root" laufen? Was ist der Standard Nutzer für WebServer auf UNIX-artigen Systemen?
-    \item Kann das betreiben der Applikation innerhalb eines Docker-Containers zusätzlichen Schutz bieten?
+    \item Warum sollten Web-Anwendungen nicht als Benutzer "root" laufen? Was ist der Standard Nutzer für Web-Server auf vielen UNIX-artigen Systemen?
+    \item Kann das Betreiben der Web-Applikation innerhalb eines Docker-Containers zusätzlichen Schutz bieten?
     \item Was bedeutet es Passwörter zu "hashen" und zu "salten" und warum sollte eine Web-Anwendung dies tun?
     \item Was für weitere Ansätze fallen Ihnen ein um eine Web-Anwendung in der Tiefe sicher zu machen?
 \end{enumerate}
@@ -87,7 +87,7 @@ In dieser Anwendung können Nachrichten über ein Formular erstellt werden. Dies
 
 \begin{enumerate}
     \item Sichern Sie die Anwendung gegen XSS-Angriffe ab indem sie "input-validation" in der entsprechenden Methode durchführen. (Anmerkung: Das hier verwendete Flask-Framework macht dies normalerweise von alleine indem es jeglichen durch Variablen in die Templates eingefügten Inhalt HTML-Escaped. Für diese Übung wurde dieses Feature abgeschaltet.)
-    \item Hashen und Salten sie die im Formular als "secret" übergebene Variable in der dafür vorgesehen Funktion mit der Python-Bibliothek "bcrypt"
+    \item Hashen und Salten sie die im Formular als "secret" übergebene Variable in der dafür vorgesehenen Funktion mit der Python-Bibliothek "bcrypt".
 \end{enumerate}
 
 

@@ -57,15 +57,15 @@
 
 \subsection{Theorie}
 Anforderungen an Passwörter:\\ 
-Passwörter sollten komplex und unvorhersehbar sein. Zum erstellen der Passwörter können die "Dice-Methode", Anfangsbuchstaben aus Sätzen oder die DAO-Methode verwendet werden.
+Passwörter sollten komplex und unvorhersehbar sein. Zum Erstellen der Passwörter können die "Dice-Methode", Anfangsbuchstaben aus Sätzen oder die DAO-Methode verwendet werden.
 Es sollten keine Passwörter zugelassen werden, die bereits in einer Passwortdatenbank veröffentlicht wurden.
 Außerdem sollte jedes Passwort nur für einen einzigen Dienst verwendet werden.\\
 
 \noindent Maßnahmen zur Umsetzung in Unternehmen:\\
 Eine wichtige Maßnahme ist die Durchführung von regelmäßigen Sicherheitsschulungen, in denen die Mitarbeiter den richtigen Umgang mit Tools wie Passwortmanagern oder 2-Faktor-Authentifizierung lernen.
 Die Nutzung von Passwortmanagern in der Firma kann außerdem dazu führen, dass die Mitarbeiter wirklich ein neues Passwort für jeden Service anlegen. Auch das Erzwingen von mehrstufiger Authentifizierung kann einen zusätzlichen Schutz für die Accounts der Mitarbeiter bringen.
-Außerdem müssen Feedback und Support in der Firma angeboten werden um fragen der Mitarbeiter zu beantworten.
-Eine weitere technische Maßnahme kann die Implementierung von passwortlosen Technologien wie FIDO2 in die genutzten Services sein. Diese machen es den Nutzern einfacher sich einzuloggen während sie gleichzeitig die Sicherheit erhöhen. 
+Außerdem müssen Feedback und Support in der Firma angeboten werden um Fragen der Mitarbeiter zu beantworten.
+Eine weitere technische Maßnahme kann die Implementierung von passwortlosen Technologien wie FIDO2 in die genutzten Services sein. Diese machen es den Nutzern einfacher sich einzuloggen, während sie gleichzeitig die Sicherheit erhöhen. 
 
 
 \subsection{Praxis}
@@ -79,9 +79,9 @@ Der Quelltext zur Lösung befindet sich in Passwords/solution.py
     
     \item Web-Anwendungen sollten nicht als "root" Nutzer laufen, da sonst durch eine Schwachstelle in der Web-Applikation auf das gesamte System zugegriffen werden kann, anstatt nur auf den Bereich des Nutzers. Der Standard Nutzer für Web-Server und Web-Applikationen auf vielen UNIX-artigen Systemen (insbesondere auf Debian basierten Systemen) ist "www-data".
     
-    \item Ja ein Container kann zusätzlichen Schutz für den Rest des Systems bieten, nicht aber für die eigentliche Web-Applikation. Durch die Isolation der Web-Applikation und die minimale Umgebung kann der Effekt eines kompromittierten Containers auf das Hostsystem beschränkt werden.
+    \item Ja, ein Container kann zusätzlichen Schutz für den Rest des Systems bieten, nicht aber für die eigentliche Web-Applikation. Durch die Isolation der Web-Applikation und die minimale Umgebung kann der Effekt eines kompromittierten Containers auf das Hostsystem beschränkt werden.
     
-    \item Die Passwörter der Nutzer sollten nicht im Klartext in der Datenbank einer Web-Applikation gespeichert werden. Daher werden die Passwörter gehasht und nur der Hash wird abgespeichert. Beim Hashen wird auf das Passwort eine Einwegfunktion angewandt die einen Ausgabewert in immer gleicher länger erzeugt (Digest). Um zu verhindern, dass Angreifer vorgefertigte Tabellen mit Hashes zu gängigen Passwörtern verwenden können und aus den Hashes das Passwort zu schließen (Rainbow-Tables) werden die Passwörter zusätzlich gesalted. Beim salten wird eine zufällige Zeichenfolge erzeugt und zum Passwort hinzugefügt bevor es gehasht wird. Dadurch erhalten selbst gleiche Passwörter unterschiedliche Hashes und damit auch unterschiedliche Einträge in der Datenbank. Die Salts können in der Datenbank einfach mit gespeichert werden.
+    \item Die Passwörter der Nutzer sollten nicht im Klartext in der Datenbank einer Web-Applikation gespeichert werden. Daher werden die Passwörter gehasht und nur der Hash wird abgespeichert. Beim Hashen wird auf das Passwort eine Einwegfunktion angewandt, die einen Ausgabewert in immer gleicher länger erzeugt (Digest). Um zu verhindern, dass Angreifer vorgefertigte Tabellen mit Hashes zu gängigen Passwörtern verwenden können und aus den Hashes das Passwort schließen (Rainbow-Tables), werden die Passwörter zusätzlich gesalted. Beim salten wird eine zufällige Zeichenfolge erzeugt und zum Passwort hinzugefügt, bevor es gehasht wird. Dadurch erhalten selbst gleiche Passwörter unterschiedliche Hashes und damit auch unterschiedliche Einträge in der Datenbank. Die Salts können in der Datenbank einfach mit gespeichert werden.
 
     \item Regelmäßige Updates aller Komponenten des Systems, sowie gutes Monitoring und Logging helfen genauso wie gut eingestellte Firewalls dafür das System in der Tiefe sicherer zu machen.
     
