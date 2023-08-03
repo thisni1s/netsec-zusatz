@@ -1,18 +1,24 @@
 1.1
 Lösung:
 Anforderungen an Passwörter: 
-Komplex und Unvorhersehbar, erfinden mit Dice Method, Buchstaben aus Sätzen, DAO 
-Keine bereits veröffentlichten Passwörter
+Passörter sollten komplex und unvorhersehbar sein. Zum erstellen der Passörter können die "Dice-Methode", Angangsbuschtaben aus Sätzen oder die DAO Methode verwendet werden.
+Es sollten keine Passörter zugelassen werden die bereits in einer Passwortdatenbak veröffentlicht wurden.
+Außerdem sollte jedes Passwort nur für einen einzigen DIenst verwendet werden.
 
-Organisationale Maßnahmen
-Empfehlen von Passwortmanagern
-Regelmäßige Sicherheitsschulungen
-Multi-Factor Authentication
-Nutzung von modernen Passwortlosen Technoligien wie FIDO2
+Maßnahmen zur Umsetzung in Unternehmen:
+Eine wichtige Maßnahme ist die Durchführung von regelmäßigen Sicherheitsschulungen, in denen die Mitarbeiter den richtigen Umgang mit Tools wie Passwortmanagern oder 2-Faktor-Authentifizierung lernen.
+Die Nutzung von Passwortmanagern in der Firma kann außerdem dazu führen, dass die Mitarbeiter wirklich ein eneues Passwort für jeden Service anlegen. Auch das Erzwingen von mehrstufiger Authentifizierung kann einen zuätzlichen Schutz für die Accounts der Mitarbeiter bringen.
+Außerdem müssen Feedback und Support in der Firma angeboten werden um fragen der Mitarbeiter zu beantworten.
+Eine weiterere technische Maßnahme kann die implementierung von Passwortlosen Technologien wie FIDO2 in die genutzten Services sein. Diese machen es den Nutzern einfacher sich einzuloggen während sie gleichzeitig die Sicherheit erhöhen. 
 
-1.2 -> CODE
+1.2 -> CODE -> Passwords/solution.py
 
 2.1
-    5. regelmäßige updates, monitoring and logging, Firewalls
 
-2.2 -> CODE
+1. "Defense in Depth" beschreibt das Konzept, ein System durch mehrere Sicherheitsebenen zu schützen. Statt sich auf eine einzige Sicherheitsmaßnahme zu verlassen, wird das System durch eine Reihe von Schutzmechanismen abgesichert, die auf verschiedenen Ebenen wirken.
+2. Web-Anwendungen sollten nicht als "root" Nutzer laufen, da sonst durch eine Schwachstelle in der Web-Applikation auf das gesamte System zugegriffen werden kann, anstatt nur auf den Bereich des Nutzers. Der Standard Nutzer für Web-Server und Web-Applikationen auf vielen UNIX-artigen Systemem (insbesondere Debian basierte Systeme) ist "www-data".
+3. Ja ein Container kann zusätzlichen Schutz für den Rest des Systems bieten, nicht aber für die eigentliche Web-Applikation. Durch die Isolation der Web-Applikation und die minimale Umgebung kann der Effekt eines kompromitierten Containers auf das Hostsystem beschränkt werden.
+4. Die Passwörter der Nutzer sollten nicht im Klartext in der Datenbank einer Web-Applikation gespeichert werdenn. Daher werden die Passwörter gehasht und nur der Hash wird abgespeichert. Beim Hashen wird auf das Passwort eine Einwegfunktion angewandt die einen Ausgabewert in immer gleicher länger erzeugt (Digest). Um zu verhindern, dass Angreifer vorgerfertigte Tabellen mit Hashes zu gängigen Passwörtern verwenden können und aus den Hashes das Passwort zu schließen (Rainbow-Tables) werden die Passwörter zusätzlich gesalted. Beim salten wird eine zufällige Zeichenfolge erzeugt und zum Passwort hinzugefügt bevor es gehasht wird. Dadurch erhalten selbst gleiche Passwörter unterschiedliche Hashes und damit auch unterschiedliche Einträge in der Datenbank. Die Salts können in der Datenbank einfach mit gespeichert werden. 
+5. Regelmäßige Updates aller Komponenten des Systems, sowie gutes Monitoring und Logging helfen genauso wie gut eingestellte Firewalls dafür das System in der Tiefe sicherer zu machen.
+
+2.2 -> CODE -> Flask-Beispiel -> solution.py
