@@ -59,7 +59,7 @@ Sie sind als Sicherheitsexperte für eine Firma tätig und sollen eine neue Pass
 Formulieren Sie sowohl Anforderungen an die Passwörter, die von den Mitarbeitern erfüllt werden müssen, als auch Wege diese Regeln in der Firma umzusetzen.
 
 \subsection{Praxis}
-Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nutzen Sie dafür die vier in der Vorlesung beschriebenen Checks und implementieren sie die entsprechenden Funktionen in der vorgefertigten Datei "Passwords/password\_checker.py".
+Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nutzen Sie dafür die vier in der Vorlesung beschriebenen Checks und implementieren sie die entsprechenden Funktionen in der vorgefertigten Datei "Passwords/password\_checker.py" 
 
 \begin{itemize}
     \item Überprüfen Sie, ob das Passwort aus einem Wörterbuch stammt. Nutzen sie dafür die Datei "wordlist-german.txt" aus dem Ordner "Passwords".
@@ -82,12 +82,12 @@ Schreiben Sie ein Python Programm, dass Passwörter auf Komplexität prüft. Nut
 
 \subsection{Praxis}
 Laden Sie die im Ordner "Flask-Beispiel" zur Verfügung stehende Python Web-Anwendung herunter. \\
-Installieren sie die notwendigen Pakete mit "pip install -r requirements.txt" und starten sie die Anwendung mit "flask run". Öffnen sie in ihrem Browser die Adresse "http://127.0.0.1:5000" um die Anwendung zu sehen.
-In dieser Anwendung können Nachrichten über ein Formular erstellt werden. Diese werden auf der Startseite angezeigt.
+Installieren sie die notwendigen Pakete mit "pip install -r requirements.txt" und starten sie die Anwendung mit "flask run -p 54321". Öffnen sie in ihrem Browser die Adresse "http://127.0.0.1:54321" um die Anwendung zu sehen.
+In dieser Anwendung können Nachrichten über ein Formular erstellt werden. Diese werden auf der Startseite angezeigt. Außerdem werden ein "secret" und ein "salt" angezeigt. Dies ist zwar untypisch für ein Message-Board, hilft Ihnen aber indem es alle Felder der Objekte direkt sichtbar macht.
 
 \begin{enumerate}
     \item Sichern Sie die Anwendung gegen XSS-Angriffe ab indem sie "input-validation" in der entsprechenden Methode durchführen. (Anmerkung: Das hier verwendete Flask-Framework macht dies normalerweise von alleine indem es jeglichen durch Variablen in die Templates eingefügten Inhalt HTML-Escaped. Für diese Übung wurde dieses Feature abgeschaltet.)
-    \item Hashen und Salten sie die im Formular als "secret" übergebene Variable in der dafür vorgesehenen Funktion mit der Python-Bibliothek "bcrypt".
+    \item Hashen und Salten sie die im Formular als "secret" übergebene Variable in der dafür vorgesehenen Funktion mit der Python-Bibliothek "bcrypt". https://pypi.org/project/bcrypt/
 \end{enumerate}
 
 
@@ -97,3 +97,4 @@ In dieser Anwendung können Nachrichten über ein Formular erstellt werden. Dies
 
 
 \end{document}
+

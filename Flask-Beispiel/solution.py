@@ -4,13 +4,20 @@ import bcrypt
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'itsallsecret'
 
-messages = [{'title': 'Message One', 'content': 'Message One Content', 'secret': 'secure', 'salt': '123456'},
-            {'title': 'Message Two', 'content': 'Message Two Content', 'secret': '123456', 'salt': 'secure'}
+messages = [{'title': 'Message One', 'content': 'Message One Content', 'secret': 'secure'.encode('utf-8'), 'salt': '123456'.encode('utf-8')},
+            {'title': 'Message Two', 'content': 'Message Two Content', 'secret': '123456'.encode('utf-8'), 'salt': 'secure'.encode('utf-8')}
             ]
 
 @app.route('/')
 def index():
-    return render_template('index.html', messages=messages)
+    msg = messages.copy()
+    for index, message in enumerate(msg):
+        m = message.copy()
+        m['secret'] = message['secret'].hex()
+        m['salt'] = message['salt'].hex()
+        msg[index] = m        
+
+    return render_template('index.html', messages=msg)
 
 @app.route('/create/', methods=('GET', 'POST'))
 def create():

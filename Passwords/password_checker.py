@@ -5,27 +5,24 @@ from dateutil.parser import parse
 
 # Leet Speek substitutions dictionary
 substitutions =  {
-    '4': 'a',
-    '@': 'a',
-    '8': 'b',
-    '(': 'c',
-    '{': 'c',
-    '3': 'e',
-    '6': 'g',
-    '9': 'g',
-    '#': 'h',
-    '1': 'l',
-    '|': 'l',
-    '0': 'o',
-    '$': 's',
-    '5': 's',
-    '+': 't',
-    '7': 't',
-    '2': 'z',
-    '!': 'i',
-    '|': 'i'
+    'a': '4',
+    'b': '8',
+    'c': '<',
+    'd': '|)',
+    'e': '3',
+    'f': '|=',
+    'g': '6',
+    'i': '1',
+    'o': '0',
+    'p': '|>',
+    'q': '9',
+    'r': '|2',
+    's': '5',
+    't': '7',
+    'x': '><',
+    'y': '`/',
+    'z': '2'
 }
-
 
 def check_password_against_haveibeenpwned(password) -> bool:
     #
@@ -37,7 +34,8 @@ def check_password_against_haveibeenpwned(password) -> bool:
 def is_date(password) -> bool:
     #
     # TODO: Überprüfen sie ob das Passwort ein Datum enthält.
-    # Tipp: Nutzen sie das Flag 'fuzzy' aus der dateutil library
+    # Tipp: Nutzen sie das Flag 'fuzzy' aus der dateutil library,
+    # auch wenn diese sehr empfindlich ist, soll es hier ausreichen.
     #
     return False
 
@@ -51,27 +49,30 @@ def is_from_dictionary(password) -> bool:
 def check_with_substitutions(password) -> bool:
     #
     # TODO: Ersetzen sie gängige LeetSpeak Zeichen durch normale Textzeichen
-    # und prüfen sie dass dadurch enstandenen Passwort
+    # und prüfen sie dass dadurch enstandene Passwort
+    # Es reicht aus wenn Sie einmal alle Buchstaben durch ihr LeetSpeak äquivalent ersetzen,
+    # auch wenn in der Realität verschiedene Kombinationen möglich sind.
+    #
     return 
 
 def check_password(password):
 
-    # Check if the password is from a dictionary (case-insensitive)
+    # Überprüfe ob das password aus dem Wörterbuch stammt (unabhängig von Groß/Kleinschreibung)
     if is_from_dictionary(password):
-        print("Password is from the dictionary.")
+        print("Passwort stammt aus dem Wörterbuch")
         return False
 
-    # Check if the password is on the list of common passwords tried by attackers
+    # Überprüfe ob das Passwort auf einer Liste steht die von Angreifern genutzt werden kann.
     if check_password_against_haveibeenpwned(password):
-        print("Password is a common password used by attackers.")
+        print("Passwort steht auf einer Liste steht die von Angreifern genutzt werden kann. ")
         return False
     
-    # Check for combinations of numbers that are dates
+    # Überprüfe auf Zahlenkombinationen die Daten ergeben.
     if is_date(password):
-        print("Password is a date.")
+        print("Passwort enthält ein Datum")
         return False
 
-    # Password passed all checks
+    # Passwort hat alle Cheks bestanden
     return True
 
 if __name__ == "__main__":
@@ -85,4 +86,4 @@ if __name__ == "__main__":
         sys.exit(1)
     if check_with_substitutions(password) is False:
         sys.exit(1)
-    print("Password is secure.")
+    print("Passwort ist sicher.")

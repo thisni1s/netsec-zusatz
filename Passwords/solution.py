@@ -5,25 +5,23 @@ from dateutil.parser import parse
 
 # Leet Speek substitutions dictionary
 substitutions =  {
-    '4': 'a',
-    '@': 'a',
-    '8': 'b',
-    '(': 'c',
-    '{': 'c',
-    '3': 'e',
-    '6': 'g',
-    '9': 'g',
-    '#': 'h',
-    '1': 'l',
-    '|': 'l',
-    '0': 'o',
-    '$': 's',
-    '5': 's',
-    '+': 't',
-    '7': 't',
-    '2': 'z',
-    '!': 'i',
-    '|': 'i'
+    'a': '4',
+    'b': '8',
+    'c': '<',
+    'd': '|)',
+    'e': '3',
+    'f': '|=',
+    'g': '6',
+    'i': '1',
+    'o': '0',
+    'p': '|>',
+    'q': '9',
+    'r': '|2',
+    's': '5',
+    't': '7',
+    'x': '><',
+    'y': '`/',
+    'z': '2'
 }
 
 
@@ -58,28 +56,28 @@ def is_from_dictionary(password) -> bool:
     
 def check_with_substitutions(password) -> bool:
     password_subs = password
-    for subs, letter in substitutions.items():
+    for letter, subs in substitutions.items():
         password_subs = password_subs.replace(letter, subs)        
     return check_password(password_subs)
 
 def check_password(password):
 
-    # Check if the password is from a dictionary (case-insensitive)
+    # Überprüfe ob das password aus dem Wörterbuch stammt (unabhängig von Groß/Kleinschreibung)
     if is_from_dictionary(password):
         print("Password is from the dictionary.")
         return False
 
-    # Check if the password is on the list of common passwords tried by attackers
+    # Überprüfe ob das Passwort auf einer Liste steht die von Angreifern genutzt werden kann.
     if check_password_against_haveibeenpwned(password):
         print("Password is a common password used by attackers.")
         return False
     
-    # Check for combinations of numbers that are dates
+    # Überprüfe auf Zahlenkombinationen die Daten ergeben.
     if is_date(password):
         print("Password is a date.")
         return False
 
-    # Password passed all checks
+    # Passwort hat alle Cheks bestanden
     return True
 
 if __name__ == "__main__":
@@ -93,4 +91,4 @@ if __name__ == "__main__":
         sys.exit(1)
     if check_with_substitutions(password) is False:
         sys.exit(1)
-    print("Password is secure.")
+    print("Passwort ist sicher.")
